@@ -1,30 +1,177 @@
-# 漁業体験アプリ
+# 篠島体験アプリ - Shinojima Experience App
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+愛知県篠島の伝統的な漁業と神饌文化を体験できる多言語対応の体験予約プラットフォーム
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/yuyafrs1578-gmailcoms-projects/v0-)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/owVUxUbsdne)
+## 🌊 プロジェクト概要
 
-## Overview
+篠島は愛知県知多半島沖に位置する美しい島で、古くから漁業で栄え、伊勢神宮に奉納される神聖な「おんべ鯛」の産地として知られています。このアプリケーションは、篠島の豊かな文化と伝統を世界に発信し、訪問者に本物の島体験を提供することを目的としています。
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## ✨ 主な機能
 
-## Deployment
+### 🎯 体験予約システム
+- **6つの体験カテゴリー**
+  - 伝統漁業体験（定置網漁と船上料理）
+  - 神饌文化体験（おんべ鯛の調理と奉納）
+  - 島の恵み料理教室
+  - 早朝漁業体験（朝市と魚の競り）
+  - 篠島神社参拝と歴史散策
+  - 海女文化体験（素潜りと海藻採取）
 
-Your project is live at:
+### 🌐 多言語対応
+- 日本語・英語の完全対応
+- リアルタイム言語切り替え
+- ローカルストレージによる言語設定保存
 
-**[https://vercel.com/yuyafrs1578-gmailcoms-projects/v0-](https://vercel.com/yuyafrs1578-gmailcoms-projects/v0-)**
+### 📱 レスポンシブデザイン
+- モバイル・タブレット・デスクトップ対応
+- 直感的なユーザーインターフェース
+- アクセシビリティ配慮
 
-## Build your app
+### 🔍 高度な検索・フィルター機能
+- カテゴリー別フィルタリング
+- 価格・評価・人気度でのソート
+- キーワード検索
 
-Continue building your app on:
+## 🛠 技術スタック
 
-**[https://v0.app/chat/projects/owVUxUbsdne](https://v0.app/chat/projects/owVUxUbsdne)**
+- **フレームワーク**: Next.js 14 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS
+- **UIコンポーネント**: Radix UI + shadcn/ui
+- **状態管理**: React Context API
+- **アイコン**: Lucide React
+- **画像最適化**: Next.js Image
 
-## How It Works
+## 📁 プロジェクト構造
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+```
+├── app/                          # Next.js App Router
+│   ├── about/                    # 篠島について
+│   │   └── history/             # 篠島の歴史
+│   ├── experiences/             # 体験一覧・詳細
+│   │   ├── [id]/               # 動的ルート（体験詳細）
+│   │   ├── 1-6/                # 各体験の専用ページ
+│   │   └── page.tsx            # 体験一覧
+│   ├── globals.css             # グローバルスタイル
+│   ├── layout.tsx              # ルートレイアウト
+│   └── page.tsx                # ホームページ
+├── components/                  # 再利用可能コンポーネント
+│   ├── ui/                     # shadcn/ui コンポーネント
+│   ├── experience-card.tsx     # 体験カード
+│   ├── header.tsx              # ヘッダー
+│   └── language-switcher.tsx   # 言語切り替え
+├── hooks/                      # カスタムフック
+│   └── use-language.tsx        # 言語管理
+├── lib/                        # ユーティリティ
+│   ├── i18n.ts                # 国際化設定
+│   └── utils.ts               # 共通ユーティリティ
+└── public/                     # 静的ファイル
+    └── *.jpg                   # 体験画像
+```
+
+## 🚀 セットアップ
+
+### 前提条件
+- Node.js 18.0.0 以上
+- npm または yarn
+
+### インストール
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/your-username/shinojima-experience.git
+cd shinojima-experience
+
+# 依存関係をインストール
+npm install
+
+# 開発サーバーを起動
+npm run dev
+```
+
+アプリケーションは `http://localhost:3000` で起動します。
+
+## 📖 使用方法
+
+### 基本的な流れ
+1. **ホームページ**: 篠島の魅力と体験カテゴリーを確認
+2. **体験一覧**: 興味のある体験を検索・フィルタリング
+3. **体験詳細**: 詳細情報、スケジュール、レビューを確認
+4. **予約**: 日時・人数を選択して予約
+5. **確認**: 予約内容を確認（テスト環境）
+
+### 言語切り替え
+- 右上の地球アイコンから日本語・英語を選択
+- 全ページが選択した言語で表示される
+
+## 🎨 デザインシステム
+
+### カラーパレット
+- **プライマリー**: オーシャンブルー（海をイメージ）
+- **セカンダリー**: ゴールデンイエロー（文化的アクセント）
+- **背景**: ライトシアン（清潔感のある背景）
+
+### タイポグラフィ
+- **フォント**: Inter（可読性重視）
+- **見出し**: 120% line-height
+- **本文**: 150% line-height
+
+## 🔧 開発
+
+### 新しい体験を追加
+1. `app/experiences/page.tsx` の `allExperiences` 配列に追加
+2. `app/experiences/[id]/page.tsx` の `experienceDataMap` に詳細データを追加
+3. 必要に応じて専用ページを作成
+
+### 多言語対応の追加
+1. `lib/i18n.ts` の `translations` オブジェクトに新しいキーを追加
+2. 各コンポーネントで `useLanguage` フックを使用
+
+### スタイルのカスタマイズ
+- `app/globals.css` でCSS変数を調整
+- `tailwind.config.js` でTailwindの設定をカスタマイズ
+
+## 📱 レスポンシブ対応
+
+- **モバイル**: 320px〜768px
+- **タブレット**: 768px〜1024px  
+- **デスクトップ**: 1024px以上
+
+## 🌟 特徴的な機能
+
+### 体験予約システム
+- リアルタイムの空き状況確認
+- 複数人数対応（大人・子供料金）
+- 詳細なスケジュール表示
+
+### 文化的配慮
+- 神饌文化の正確な表現
+- 伝統的な漁法の詳細説明
+- 地域の歴史と文化の紹介
+
+### ユーザビリティ
+- 直感的なナビゲーション
+- 明確な情報階層
+- アクセシブルなデザイン
+
+## 🤝 コントリビューション
+
+1. このリポジトリをフォーク
+2. 機能ブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更をコミット (`git commit -m 'Add amazing feature'`)
+4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
+5. プルリクエストを作成
+
+## 📄 ライセンス
+
+このプロジェクトはMITライセンスの下で公開されています。
+
+## 📞 お問い合わせ
+
+- **Email**: info@shinojima-experience.jp
+- **Website**: https://shinojima-experience.jp
+- **GitHub**: https://github.com/your-username/shinojima-experience
+
+---
+
+**篠島の美しい自然と豊かな文化を世界に発信し、持続可能な観光の発展に貢献します。**
