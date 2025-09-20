@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { LanguageSwitcher } from "@/components/language-switcher"
+import { SimpleLanguageSwitcher } from "@/components/simple-language-switcher"
 import { Menu, X } from "lucide-react"
 import { useLanguage } from "@/hooks/use-language"
 
@@ -42,7 +42,7 @@ export function Header() {
             <Link href="/contact" className="text-foreground hover:text-primary transition-colors">
               {language === "ja" ? "お問い合わせ" : "Contact"}
             </Link>
-            <LanguageSwitcher />
+            <SimpleLanguageSwitcher />
           </nav>
 
           <Button
@@ -67,7 +67,7 @@ export function Header() {
               <Link href="/contact" className="text-foreground hover:text-primary transition-colors">
                 {language === "ja" ? "お問い合わせ" : "Contact"}
               </Link>
-              <LanguageSwitcher />
+              <SimpleLanguageSwitcher />
             </div>
           </nav>
         )}

@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { ArrowLeft, CreditCard, Shield, Calendar, Users, Clock } from "lucide-react"
+import { useLanguage } from "@/hooks/use-language"
 
 // Mock booking data - would come from previous page/state management
 const bookingData = {
@@ -32,6 +33,7 @@ const bookingData = {
 }
 
 export default function BookingPage() {
+  const { language, t } = useLanguage()
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -62,18 +64,18 @@ export default function BookingPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Link href="/" className="hover:text-primary">
-              ホーム
+              {t.home}
             </Link>
             <span>/</span>
             <Link href="/experiences" className="hover:text-primary">
-              体験一覧
+              {t.experiences}
             </Link>
             <span>/</span>
             <Link href={`/experiences/${bookingData.experience.id}`} className="hover:text-primary">
-              体験詳細
+              {language === "ja" ? "体験詳細" : "Experience Details"}
             </Link>
             <span>/</span>
-            <span className="text-foreground">予約確認</span>
+            <span className="text-foreground">{t.bookingTitle}</span>
           </div>
         </div>
 
@@ -82,7 +84,7 @@ export default function BookingPage() {
             <Button variant="ghost" size="sm" asChild>
               <Link href={`/experiences/${bookingData.experience.id}`}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                体験詳細に戻る
+                {language === "ja" ? "体験詳細に戻る" : "Back to Experience Details"}
               </Link>
             </Button>
           </div>
@@ -92,31 +94,33 @@ export default function BookingPage() {
             <div className="lg:col-span-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-2xl">予約情報の入力</CardTitle>
+                  <CardTitle className="text-2xl">
+                    {language === "ja" ? "予約情報の入力" : "Enter Booking Information"}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Personal Information */}
                     <div>
-                      <h3 className="text-lg font-semibold mb-4">お客様情報</h3>
+                      <h3 className="text-lg font-semibold mb-4">{t.personalInfo}</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="lastName">姓 *</Label>
+                          <Label htmlFor="lastName">{t.lastName} *</Label>
                           <Input
                             id="lastName"
                             value={formData.lastName}
                             onChange={(e) => handleInputChange("lastName", e.target.value)}
-                            placeholder="山田"
+                            placeholder={language === "ja" ? "山田" : "Yamada"}
                             required
                           />
                         </div>
                         <div>
-                          <Label htmlFor="firstName">名 *</Label>
+                          <Label htmlFor="firstName">{t.firstName} *</Label>
                           <Input
                             id="firstName"
                             value={formData.firstName}
                             onChange={(e) => handleInputChange("firstName", e.target.value)}
-                            placeholder="太郎"
+                            placeholder={language === "ja" ? "太郎" : "Taro"}
                             required
                           />
                         </div>
@@ -125,10 +129,12 @@ export default function BookingPage() {
 
                     {/* Contact Information */}
                     <div>
-                      <h3 className="text-lg font-semibold mb-4">連絡先情報</h3>
+                      <h3 className="text-lg font-semibold mb-4">
+                        {language === "ja" ? "連絡先情報" : "Contact Information"}
+                      </h3>
                       <div className="space-y-4">
                         <div>
-                          <Label htmlFor="email">メールアドレス *</Label>
+                          <Label htmlFor="email">{t.email} *</Label>
                           <Input
                             id="email"
                             type="email"
@@ -139,13 +145,13 @@ export default function BookingPage() {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="phone">電話番号 *</Label>
+                          <Label htmlFor="phone">{t.phone} *</Label>
                           <Input
                             id="phone"
                             type="tel"
                             value={formData.phone}
                             onChange={(e) => handleInputChange("phone", e.target.value)}
-                            placeholder="090-1234-5678"
+                            placeholder={language === "ja" ? "090-1234-5678" : "+81-90-1234-5678"}
                             required
                           />
                         </div>
@@ -154,25 +160,32 @@ export default function BookingPage() {
 
                     {/* Special Requests */}
                     <div>
-                      <Label htmlFor="specialRequests">特別なご要望（任意）</Label>
+                      <Label htmlFor="specialRequests">{t.specialRequests}</Label>
                       <textarea
                         id="specialRequests"
                         value={formData.specialRequests}
                         onChange={(e) => handleInputChange("specialRequests", e.target.value)}
-                        placeholder="アレルギーや特別な配慮が必要な場合はお書きください"
+                        placeholder={language === "ja"
+                          ? "アレルギーや特別な配慮が必要な場合はお書きください"
+                          : "Please mention any allergies or special requirements"
+                        }
                         className="w-full min-h-[100px] px-3 py-2 border border-input rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-ring"
                       />
                     </div>
 
                     {/* Payment Method */}
                     <div>
-                      <h3 className="text-lg font-semibold mb-4">お支払い方法</h3>
+                      <h3 className="text-lg font-semibold mb-4">
+                        {language === "ja" ? "お支払い方法" : "Payment Method"}
+                      </h3>
                       <Card className="border-2 border-primary">
                         <CardContent className="p-4">
                           <div className="flex items-center gap-3">
                             <CreditCard className="h-5 w-5 text-primary" />
                             <div>
-                              <p className="font-medium">クレジットカード</p>
+                              <p className="font-medium">
+                                {language === "ja" ? "クレジットカード" : "Credit Card"}
+                              </p>
                               <p className="text-sm text-muted-foreground">Visa, Mastercard, JCB, American Express</p>
                             </div>
                           </div>
@@ -185,11 +198,11 @@ export default function BookingPage() {
                       <div className="flex items-start gap-3">
                         <Shield className="h-5 w-5 text-primary mt-0.5" />
                         <div className="text-sm">
-                          <p className="font-medium mb-2">キャンセルポリシー</p>
+                          <p className="font-medium mb-2">{t.cancellationPolicy}</p>
                           <ul className="space-y-1 text-muted-foreground">
-                            <li>• 7日前まで: 無料キャンセル</li>
-                            <li>• 3-6日前: 50%のキャンセル料</li>
-                            <li>• 2日前以降: 100%のキャンセル料</li>
+                            <li>• {language === "ja" ? "7日前まで: 無料キャンセル" : "Up to 7 days: Free cancellation"}</li>
+                            <li>• {language === "ja" ? "3-6日前: 50%のキャンセル料" : "3-6 days: 50% cancellation fee"}</li>
+                            <li>• {language === "ja" ? "2日前以降: 100%のキャンセル料" : "2 days or less: 100% cancellation fee"}</li>
                           </ul>
                         </div>
                       </div>
@@ -200,16 +213,21 @@ export default function BookingPage() {
                       <div className="flex items-start gap-2">
                         <div className="text-yellow-600 text-sm">⚠️</div>
                         <div className="text-sm text-yellow-800">
-                          <p className="font-medium mb-1">テスト予約システムについて</p>
+                          <p className="font-medium mb-1">
+                            {language === "ja" ? "テスト予約システムについて" : "About Test Booking System"}
+                          </p>
                           <p>
-                            これはデモンストレーション用の予約システムです。実際の予約は行われませんので、ご注意ください。
+                            {language === "ja"
+                              ? "これはデモンストレーション用の予約システムです。実際の予約は行われませんので、ご注意ください。"
+                              : "This is a demonstration booking system. No actual reservations will be made."
+                            }
                           </p>
                         </div>
                       </div>
                     </div>
 
                     <Button type="submit" className="w-full" size="lg" disabled={!isFormValid}>
-                      予約を確定する
+                      {t.confirmBooking}
                     </Button>
                   </form>
                 </CardContent>
@@ -221,13 +239,21 @@ export default function BookingPage() {
               <div className="sticky top-24">
                 <Card>
                   <CardHeader>
-                    <CardTitle>予約内容</CardTitle>
+                    <CardTitle>{t.bookingTitle}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {/* Experience Details */}
                     <div>
-                      <Badge className="mb-2">{bookingData.experience.category}</Badge>
-                      <h3 className="font-semibold text-lg mb-2">{bookingData.experience.title}</h3>
+                      <Badge className="mb-2">
+                        {language === "ja" ? bookingData.experience.category :
+                          bookingData.experience.category === "漁業体験" ? "Fishing Experience" : bookingData.experience.category
+                        }
+                      </Badge>
+                      <h3 className="font-semibold text-lg mb-2">
+                        {language === "ja" ? bookingData.experience.title :
+                          "Traditional Fishing Experience - Fixed Net Fishing & Onboard Cooking"
+                        }
+                      </h3>
                     </div>
 
                     <Separator />
@@ -236,19 +262,23 @@ export default function BookingPage() {
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 text-sm">
                         <Calendar className="h-4 w-4 text-muted-foreground" />
-                        <span>{bookingData.selectedDate}</span>
+                        <span>
+                          {language === "ja" ? bookingData.selectedDate : "January 15, 2025"}
+                        </span>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4 text-muted-foreground" />
                         <span>
-                          {bookingData.selectedTime} 開始 ({bookingData.experience.duration})
+                          {bookingData.selectedTime} {language === "ja" ? "開始" : "Start"} ({language === "ja" ? bookingData.experience.duration : "4 hours"})
                         </span>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Users className="h-4 w-4 text-muted-foreground" />
                         <span>
-                          大人{bookingData.participants.adults}名
-                          {bookingData.participants.children > 0 && `, 子供${bookingData.participants.children}名`}
+                          {language === "ja"
+                            ? `大人${bookingData.participants.adults}名${bookingData.participants.children > 0 ? `, 子供${bookingData.participants.children}名` : ''}`
+                            : `${bookingData.participants.adults} adult${bookingData.participants.adults > 1 ? 's' : ''}${bookingData.participants.children > 0 ? `, ${bookingData.participants.children} child${bookingData.participants.children > 1 ? 'ren' : ''}` : ''}`
+                          }
                         </span>
                       </div>
                     </div>
@@ -258,14 +288,14 @@ export default function BookingPage() {
                     {/* Price Breakdown */}
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span>大人 × {bookingData.participants.adults}</span>
+                        <span>{t.adults} × {bookingData.participants.adults}</span>
                         <span>
                           ¥{(bookingData.participants.adults * bookingData.experience.price).toLocaleString()}
                         </span>
                       </div>
                       {bookingData.participants.children > 0 && (
                         <div className="flex justify-between text-sm">
-                          <span>子供 × {bookingData.participants.children}</span>
+                          <span>{t.children} × {bookingData.participants.children}</span>
                           <span>
                             ¥{(bookingData.participants.children * bookingData.experience.price * 0.7).toLocaleString()}
                           </span>
@@ -273,15 +303,21 @@ export default function BookingPage() {
                       )}
                       <Separator />
                       <div className="flex justify-between font-semibold text-lg">
-                        <span>合計金額</span>
+                        <span>{t.total}</span>
                         <span className="text-primary">¥{bookingData.totalPrice.toLocaleString()}</span>
                       </div>
                     </div>
 
                     <div className="text-xs text-muted-foreground bg-muted/50 p-3 rounded">
-                      <p className="mb-1">• 予約確定後に確認メールをお送りします</p>
-                      <p className="mb-1">• 当日は集合時間の15分前にお越しください</p>
-                      <p>• 天候により体験内容が変更になる場合があります</p>
+                      <p className="mb-1">
+                        • {language === "ja" ? "予約確定後に確認メールをお送りします" : "Confirmation email will be sent after booking"}
+                      </p>
+                      <p className="mb-1">
+                        • {language === "ja" ? "当日は集合時間の15分前にお越しください" : "Please arrive 15 minutes before the meeting time"}
+                      </p>
+                      <p>
+                        • {language === "ja" ? "天候により体験内容が変更になる場合があります" : "Experience content may change due to weather conditions"}
+                      </p>
                     </div>
                   </CardContent>
                 </Card>

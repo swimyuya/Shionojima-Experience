@@ -6,54 +6,11 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight, Fish, Waves, MapPin } from "lucide-react"
 import { useLanguage } from "@/hooks/use-language"
-
-// Featured experiences data with translations
-const featuredExperiences = {
-  ja: [
-    {
-      id: "1",
-      title: "伝統漁業体験 - 定置網漁と船上料理",
-      description: "篠島の漁師と一緒に定置網漁を体験し、獲れたての魚で船上料理を楽しみます。",
-      category: "漁業体験",
-    },
-    {
-      id: "2", 
-      title: "神饌文化体験 - おんべ鯛の調理と奉納",
-      description: "伊勢神宮に奉納される神聖な「おんべ鯛」の調理法を学び、神饌文化の深さを体験します。",
-      category: "文化・歴史",
-    },
-    {
-      id: "3",
-      title: "島の恵み料理教室 - 海の幸を味わう", 
-      description: "篠島で獲れた新鮮な魚介類を使った伝統料理を地元の料理人から学びます。",
-      category: "グルメ・食育",
-    },
-  ],
-  en: [
-    {
-      id: "1",
-      title: "Traditional Fishing Experience - Fixed Net Fishing & Onboard Cooking",
-      description: "Experience fixed net fishing with Shinojima fishermen and enjoy cooking fresh catch onboard.",
-      category: "Fishing Experience",
-    },
-    {
-      id: "2",
-      title: "Sacred Food Culture Experience - Ombe-tai Preparation & Offering", 
-      description: "Learn the preparation of sacred 'Ombe-tai' offered to Ise Grand Shrine and experience the depth of sacred food culture.",
-      category: "Culture & History",
-    },
-    {
-      id: "3",
-      title: "Island Bounty Cooking Class - Taste the Sea's Gifts",
-      description: "Learn traditional cooking using fresh seafood caught in Shinojima from local chefs.",
-      category: "Gourmet & Food Education",
-    },
-  ],
-}
+import { experiencesData } from "@/lib/experiences-data"
 
 export default function HomePage() {
   const { language, t } = useLanguage()
-  const experiences = featuredExperiences[language]
+  const featuredExperiences = experiencesData.slice(0, 3)
   
   const categories = [
     { name: "fishingExperience", icon: Fish, count: 8 },
@@ -137,27 +94,19 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {experiences.map((experience, index) => (
+            {featuredExperiences.map((experience) => (
               <ExperienceCard
                 key={experience.id}
                 id={experience.id}
-                title={experience.title}
-                description={experience.description}
-                category={experience.category}
-                price={[8500, 12000, 6800][index]}
-                duration={
-                  language === "ja" ? ["4時間", "3時間", "2.5時間"][index] : ["4 hours", "3 hours", "2.5 hours"][index]
-                }
-                capacity={[8, 6, 12][index]}
-                rating={[4.8, 4.9, 4.7][index]}
-                reviewCount={[127, 89, 156][index]}
-                image={
-                  [
-                    "/traditional-fishing-boat-with-nets-in-japanese-coa.jpg",
-                    "/sacred-japanese-sea-bream-preparation-ceremony-wit.jpg",
-                    "/japanese-cooking-class-with-fresh-seafood-and-trad.jpg",
-                  ][index]
-                }
+                title={experience.title[language]}
+                description={experience.description[language]}
+                category={experience.category[language]}
+                price={experience.price}
+                duration={experience.duration[language]}
+                capacity={experience.capacity}
+                rating={experience.rating}
+                reviewCount={experience.reviewCount}
+                image={experience.image}
               />
             ))}
           </div>
