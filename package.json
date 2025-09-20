@@ -1,21 +1,12 @@
 {
-  "name": "shinojima-experience",
+  "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
-  "description": "Experience platform for traditional fishing and sacred food culture in Shinojima Island",
-  "keywords": ["shinojima", "fishing", "culture", "experience", "japan", "tourism"],
-  "author": "Shinojima Experience Team",
-  "homepage": "https://shinojima-experience.jp",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/your-username/shinojima-experience.git"
-  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start",
-    "type-check": "tsc --noEmit"
+    "start": "next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

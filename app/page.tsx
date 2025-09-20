@@ -6,17 +6,17 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight, Fish, Waves, MapPin } from "lucide-react"
 import { useLanguage } from "@/hooks/use-language"
-import { experiencesData } from "@/lib/experiences-data"
+import { experienceTranslations } from "@/lib/i18n"
+
+const categories = [
+  { name: "fishingExperience", icon: Fish, count: 8 },
+  { name: "cultureHistory", icon: MapPin, count: 5 },
+  { name: "gourmetEducation", icon: Waves, count: 12 },
+]
 
 export default function HomePage() {
   const { language, t } = useLanguage()
-  const featuredExperiences = experiencesData.slice(0, 3)
-  
-  const categories = [
-    { name: "fishingExperience", icon: Fish, count: 8 },
-    { name: "cultureHistory", icon: MapPin, count: 5 },
-    { name: "gourmetEducation", icon: Waves, count: 12 },
-  ]
+  const experiences = experienceTranslations[language].experiences.slice(0, 3)
 
   return (
     <div className="min-h-screen">
@@ -94,19 +94,27 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredExperiences.map((experience) => (
+            {experiences.map((experience, index) => (
               <ExperienceCard
                 key={experience.id}
                 id={experience.id}
-                title={experience.title[language]}
-                description={experience.description[language]}
-                category={experience.category[language]}
-                price={experience.price}
-                duration={experience.duration[language]}
-                capacity={experience.capacity}
-                rating={experience.rating}
-                reviewCount={experience.reviewCount}
-                image={experience.image}
+                title={experience.title}
+                description={experience.description}
+                category={experience.category}
+                price={[8500, 12000, 6800][index]}
+                duration={
+                  language === "ja" ? ["4時間", "3時間", "2.5時間"][index] : ["4 hours", "3 hours", "2.5 hours"][index]
+                }
+                capacity={[8, 6, 12][index]}
+                rating={[4.8, 4.9, 4.7][index]}
+                reviewCount={[127, 89, 156][index]}
+                image={
+                  [
+                    "/traditional-fishing-boat-with-nets-in-japanese-coa.jpg",
+                    "/sacred-japanese-sea-bream-preparation-ceremony-wit.jpg",
+                    "/japanese-cooking-class-with-fresh-seafood-and-trad.jpg",
+                  ][index]
+                }
               />
             ))}
           </div>

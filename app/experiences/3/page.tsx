@@ -12,73 +12,75 @@ import Image from "next/image"
 import Link from "next/link"
 import { Clock, Users, Star, MapPin, Heart, Share2, ArrowLeft, Check } from "lucide-react"
 
-// Mock data - in a real app, this would come from an API
 const experienceData = {
-  id: "1",
-  title: "伝統漁業体験 - 定置網漁と船上料理",
+  id: "3",
+  title: "島の恵み料理教室 - 海の幸を味わう",
   description:
-    "篠島の漁師と一緒に定置網漁を体験し、獲れたての魚で船上料理を楽しみます。島の伝統的な漁法を学びながら、新鮮な海の幸を味わう特別な体験です。",
-  price: 8500,
-  duration: "4時間",
-  capacity: 8,
-  rating: 4.8,
-  reviewCount: 127,
-  category: "漁業体験",
+    "篠島で獲れた新鮮な魚介類を使った伝統料理を地元の料理人から学びます。島の食文化と調理技術を体験し、海の恵みを存分に味わう料理教室です。",
+  price: 6800,
+  duration: "2.5時間",
+  capacity: 12,
+  rating: 4.7,
+  reviewCount: 156,
+  category: "グルメ・食育",
   images: [
-    "/traditional-fishing-boat-with-nets-in-japanese-coa.jpg",
-    "/fishermen-working-with-traditional-nets-on-boat-de.jpg",
-    "/fresh-seafood-cooking-on-boat-with-ocean-view.jpg",
-    "/group-of-tourists-learning-fishing-techniques-from.jpg",
+    "/japanese-cooking-class-with-fresh-seafood-and-trad.jpg",
+    "/fresh-seafood-ingredients-on-wooden-cutting-board.jpg",
+    "/traditional-japanese-kitchen-with-cooking-utensil.jpg",
+    "/group-of-people-cooking-together-in-japanese-kitc.jpg",
   ],
   schedule: [
-    { time: "06:00", activity: "漁港集合・出航準備" },
-    { time: "06:30", activity: "定置網漁場へ出航" },
-    { time: "07:00", activity: "定置網漁体験・魚の選別" },
-    { time: "09:00", activity: "船上料理体験" },
-    { time: "10:00", activity: "漁港帰港・解散" },
+    { time: "10:00", activity: "料理教室集合・食材の説明" },
+    { time: "10:30", activity: "魚の下処理と調理法の実習" },
+    { time: "11:30", activity: "伝統料理の調理体験" },
+    { time: "12:00", activity: "完成した料理の試食" },
+    { time: "12:30", activity: "終了・解散" },
   ],
-  included: ["乗船料", "漁具レンタル", "船上料理材料費", "保険料", "ライフジャケット"],
-  requirements: ["動きやすい服装", "滑りにくい靴", "帽子・日焼け止め", "着替え（濡れる可能性があります）"],
+  included: ["食材費", "調理器具レンタル", "エプロン", "レシピ集", "試食"],
+  requirements: [
+    "エプロン持参（レンタルも可）",
+    "動きやすい服装",
+    "髪の長い方はまとめてください",
+    "食物アレルギーがある方は事前にお知らせください",
+  ],
   location: {
-    name: "篠島漁港",
-    address: "愛知県知多郡南知多町篠島字浦磯",
+    name: "篠島料理教室",
+    address: "愛知県知多郡南知多町篠島字東側",
     mapUrl: "https://maps.google.com",
   },
   host: {
-    name: "田中 太郎",
-    avatar: "/friendly-japanese-fisherman-portrait.jpg",
-    bio: "篠島で3代続く漁師の家系。30年以上の漁業経験を持ち、伝統的な漁法の継承に取り組んでいます。",
-    experience: "30年以上",
+    name: "料理長 佐藤 恵子",
+    avatar: "/friendly-japanese-chef-woman-portrait.jpg",
+    bio: "篠島で20年以上料理教室を運営。地元の食材を活かした料理で多くの人に島の魅力を伝えています。",
+    experience: "20年以上",
   },
   reviews: [
     {
       id: 1,
-      name: "山田 花子",
+      name: "高橋 真由美",
       rating: 5,
-      date: "2024年12月15日",
-      comment:
-        "本当に素晴らしい体験でした！漁師さんがとても親切で、伝統的な漁法について詳しく教えてくれました。船上で食べた新鮮な魚は絶品でした。",
+      date: "2024年12月14日",
+      comment: "とても楽しい料理教室でした！新鮮な魚の扱い方から丁寧に教えてもらい、家でも作れるようになりました。",
     },
     {
       id: 2,
-      name: "John Smith",
-      rating: 5,
-      date: "2024年12月10日",
+      name: "Michael Brown",
+      rating: 4,
+      date: "2024年12月9日",
       comment:
-        "Amazing authentic experience! The fisherman was very patient and explained everything in simple Japanese. The fresh fish we caught was delicious!",
+        "Great hands-on cooking experience! The instructor was very patient and the seafood was incredibly fresh. Learned a lot about Japanese cooking techniques.",
     },
     {
       id: 3,
-      name: "佐藤 一郎",
-      rating: 4,
-      date: "2024年12月5日",
-      comment:
-        "家族で参加しました。子供たちも大喜びで、貴重な体験ができました。少し早起きが大変でしたが、それ以上の価値がありました。",
+      name: "中村 健",
+      rating: 5,
+      date: "2024年12月4日",
+      comment: "家族で参加しました。子供たちも楽しく料理できて、篠島の食文化について学べました。レシピ集も嬉しいです。",
     },
   ],
 }
 
-export default function ExperienceDetailPage() {
+export default function Experience3DetailPage() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [selectedTime, setSelectedTime] = useState("")
   const [adultCount, setAdultCount] = useState(2)
@@ -88,7 +90,7 @@ export default function ExperienceDetailPage() {
   const totalPrice = adultCount * experienceData.price + childCount * experienceData.price * 0.7
   const totalParticipants = adultCount + childCount
 
-  const availableTimes = ["06:00", "07:00", "08:00"]
+  const availableTimes = ["10:00", "14:00", "16:00"]
 
   return (
     <div className="min-h-screen">
@@ -151,6 +153,8 @@ export default function ExperienceDetailPage() {
                   </Button>
                 </div>
               </div>
+
+              {/* Image Gallery, Description, Schedule, What's Included, Host, Reviews sections follow the same pattern */}
 
               {/* Image Gallery */}
               <div className="mb-8">
@@ -219,7 +223,7 @@ export default function ExperienceDetailPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-4">持ち物・服装</h3>
+                  <h3 className="text-xl font-bold mb-4">持ち物・注意事項</h3>
                   <ul className="space-y-2">
                     {experienceData.requirements.map((item, index) => (
                       <li key={index} className="flex items-center gap-2">
@@ -239,11 +243,11 @@ export default function ExperienceDetailPage() {
                     <div className="flex items-start gap-4">
                       <Avatar className="w-16 h-16">
                         <AvatarImage src={experienceData.host.avatar || "/placeholder.svg"} />
-                        <AvatarFallback>田中</AvatarFallback>
+                        <AvatarFallback>佐藤</AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
                         <h3 className="text-xl font-semibold mb-2">{experienceData.host.name}</h3>
-                        <p className="text-muted-foreground mb-2">漁業経験: {experienceData.host.experience}</p>
+                        <p className="text-muted-foreground mb-2">料理経験: {experienceData.host.experience}</p>
                         <p className="text-muted-foreground">{experienceData.host.bio}</p>
                       </div>
                     </div>

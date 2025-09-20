@@ -12,73 +12,76 @@ import Image from "next/image"
 import Link from "next/link"
 import { Clock, Users, Star, MapPin, Heart, Share2, ArrowLeft, Check } from "lucide-react"
 
-// Mock data - in a real app, this would come from an API
 const experienceData = {
-  id: "1",
-  title: "伝統漁業体験 - 定置網漁と船上料理",
+  id: "2",
+  title: "神饌文化体験 - おんべ鯛の調理と奉納",
   description:
-    "篠島の漁師と一緒に定置網漁を体験し、獲れたての魚で船上料理を楽しみます。島の伝統的な漁法を学びながら、新鮮な海の幸を味わう特別な体験です。",
-  price: 8500,
-  duration: "4時間",
-  capacity: 8,
-  rating: 4.8,
-  reviewCount: 127,
-  category: "漁業体験",
+    "伊勢神宮に奉納される神聖な「おんべ鯛」の調理法を学び、神饌文化の深さを体験します。篠島の神聖な伝統と、海の恵みに感謝する心を学ぶ特別な文化体験です。",
+  price: 12000,
+  duration: "3時間",
+  capacity: 6,
+  rating: 4.9,
+  reviewCount: 89,
+  category: "文化・歴史",
   images: [
-    "/traditional-fishing-boat-with-nets-in-japanese-coa.jpg",
-    "/fishermen-working-with-traditional-nets-on-boat-de.jpg",
-    "/fresh-seafood-cooking-on-boat-with-ocean-view.jpg",
-    "/group-of-tourists-learning-fishing-techniques-from.jpg",
+    "/sacred-japanese-sea-bream-preparation-ceremony-wit.jpg",
+    "/traditional-japanese-shrine-ceremony-with-sea-bre.jpg",
+    "/elderly-japanese-priest-teaching-traditional-coo.jpg",
+    "/beautifully-prepared-sea-bream-on-traditional-jap.jpg",
   ],
   schedule: [
-    { time: "06:00", activity: "漁港集合・出航準備" },
-    { time: "06:30", activity: "定置網漁場へ出航" },
-    { time: "07:00", activity: "定置網漁体験・魚の選別" },
-    { time: "09:00", activity: "船上料理体験" },
-    { time: "10:00", activity: "漁港帰港・解散" },
+    { time: "09:00", activity: "神社集合・お清め" },
+    { time: "09:30", activity: "おんべ鯛の歴史と意義について学習" },
+    { time: "10:00", activity: "伝統的な調理法の実習" },
+    { time: "11:30", activity: "奉納の儀式体験" },
+    { time: "12:00", activity: "終了・解散" },
   ],
-  included: ["乗船料", "漁具レンタル", "船上料理材料費", "保険料", "ライフジャケット"],
-  requirements: ["動きやすい服装", "滑りにくい靴", "帽子・日焼け止め", "着替え（濡れる可能性があります）"],
+  included: ["調理材料費", "神社拝観料", "伝統衣装レンタル", "お守り", "記念品"],
+  requirements: [
+    "清潔な服装",
+    "髪の長い方はまとめてください",
+    "アクセサリーは控えめに",
+    "神聖な場所での体験のため、敬意を持った態度",
+  ],
   location: {
-    name: "篠島漁港",
-    address: "愛知県知多郡南知多町篠島字浦磯",
+    name: "篠島神社",
+    address: "愛知県知多郡南知多町篠島字神戸",
     mapUrl: "https://maps.google.com",
   },
   host: {
-    name: "田中 太郎",
-    avatar: "/friendly-japanese-fisherman-portrait.jpg",
-    bio: "篠島で3代続く漁師の家系。30年以上の漁業経験を持ち、伝統的な漁法の継承に取り組んでいます。",
-    experience: "30年以上",
+    name: "宮司 山田 清",
+    avatar: "/elderly-japanese-priest-portrait.jpg",
+    bio: "篠島神社の宮司として40年以上奉職。おんべ鯛の伝統を守り続け、多くの人に神饌文化の素晴らしさを伝えています。",
+    experience: "40年以上",
   },
   reviews: [
     {
       id: 1,
-      name: "山田 花子",
+      name: "田中 美香",
       rating: 5,
-      date: "2024年12月15日",
+      date: "2024年12月12日",
       comment:
-        "本当に素晴らしい体験でした！漁師さんがとても親切で、伝統的な漁法について詳しく教えてくれました。船上で食べた新鮮な魚は絶品でした。",
+        "神聖な体験でした。宮司さんの丁寧な説明で、おんべ鯛の深い意味を理解できました。日本の伝統文化の素晴らしさを実感しました。",
     },
     {
       id: 2,
-      name: "John Smith",
+      name: "Emily Johnson",
       rating: 5,
-      date: "2024年12月10日",
+      date: "2024年12月8日",
       comment:
-        "Amazing authentic experience! The fisherman was very patient and explained everything in simple Japanese. The fresh fish we caught was delicious!",
+        "Incredible spiritual experience! Learning about the sacred sea bream tradition was deeply moving. The priest was very kind and patient.",
     },
     {
       id: 3,
-      name: "佐藤 一郎",
-      rating: 4,
-      date: "2024年12月5日",
-      comment:
-        "家族で参加しました。子供たちも大喜びで、貴重な体験ができました。少し早起きが大変でしたが、それ以上の価値がありました。",
+      name: "鈴木 健太",
+      rating: 5,
+      date: "2024年12月3日",
+      comment: "伊勢神宮との関係や、篠島の歴史について詳しく学べました。実際に調理体験もでき、とても貴重な時間でした。",
     },
   ],
 }
 
-export default function ExperienceDetailPage() {
+export default function Experience2DetailPage() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [selectedTime, setSelectedTime] = useState("")
   const [adultCount, setAdultCount] = useState(2)
@@ -88,7 +91,7 @@ export default function ExperienceDetailPage() {
   const totalPrice = adultCount * experienceData.price + childCount * experienceData.price * 0.7
   const totalParticipants = adultCount + childCount
 
-  const availableTimes = ["06:00", "07:00", "08:00"]
+  const availableTimes = ["09:00", "14:00"]
 
   return (
     <div className="min-h-screen">
@@ -219,7 +222,7 @@ export default function ExperienceDetailPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-4">持ち物・服装</h3>
+                  <h3 className="text-xl font-bold mb-4">注意事項</h3>
                   <ul className="space-y-2">
                     {experienceData.requirements.map((item, index) => (
                       <li key={index} className="flex items-center gap-2">
@@ -239,11 +242,11 @@ export default function ExperienceDetailPage() {
                     <div className="flex items-start gap-4">
                       <Avatar className="w-16 h-16">
                         <AvatarImage src={experienceData.host.avatar || "/placeholder.svg"} />
-                        <AvatarFallback>田中</AvatarFallback>
+                        <AvatarFallback>山田</AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
                         <h3 className="text-xl font-semibold mb-2">{experienceData.host.name}</h3>
-                        <p className="text-muted-foreground mb-2">漁業経験: {experienceData.host.experience}</p>
+                        <p className="text-muted-foreground mb-2">奉職経験: {experienceData.host.experience}</p>
                         <p className="text-muted-foreground">{experienceData.host.bio}</p>
                       </div>
                     </div>

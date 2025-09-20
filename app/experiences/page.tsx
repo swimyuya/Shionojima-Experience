@@ -8,41 +8,112 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, Filter } from "lucide-react"
-import { useLanguage } from "@/hooks/use-language"
-import { experiencesData, type Experience } from "@/lib/experiences-data"
 
+const allExperiences = [
+  {
+    id: "1",
+    title: "伝統漁業体験 - 定置網漁と船上料理",
+    description: "篠島の漁師と一緒に定置網漁を体験し、獲れたての魚で船上料理を楽しみます。",
+    price: 8500,
+    duration: "4時間",
+    capacity: 8,
+    rating: 4.8,
+    reviewCount: 127,
+    image: "/traditional-fishing-boat-with-nets-in-japanese-coa.jpg",
+    category: "漁業体験",
+  },
+  {
+    id: "2",
+    title: "神饌文化体験 - おんべ鯛の調理と奉納",
+    description: "伊勢神宮に奉納される神聖な「おんべ鯛」の調理法を学び、神饌文化の深さを体験します。",
+    price: 12000,
+    duration: "3時間",
+    capacity: 6,
+    rating: 4.9,
+    reviewCount: 89,
+    image: "/sacred-japanese-sea-bream-preparation-ceremony-wit.jpg",
+    category: "文化・歴史",
+  },
+  {
+    id: "3",
+    title: "島の恵み料理教室 - 海の幸を味わう",
+    description: "篠島で獲れた新鮮な魚介類を使った伝統料理を地元の料理人から学びます。",
+    price: 6800,
+    duration: "2.5時間",
+    capacity: 12,
+    rating: 4.7,
+    reviewCount: 156,
+    image: "/japanese-cooking-class-with-fresh-seafood-and-trad.jpg",
+    category: "グルメ・食育",
+  },
+  {
+    id: "4",
+    title: "早朝漁業体験 - 朝市と魚の競り",
+    description: "早朝の漁港で魚の競りを見学し、新鮮な魚介類を購入できます。",
+    price: 4500,
+    duration: "2時間",
+    capacity: 15,
+    rating: 4.6,
+    reviewCount: 203,
+    image: "/early-morning-fish-market-auction-in-japanese-fish.jpg",
+    category: "漁業体験",
+  },
+  {
+    id: "5",
+    title: "篠島神社参拝と歴史散策",
+    description: "島の守り神を祀る神社を参拝し、篠島の歴史と文化を学びます。",
+    price: 3200,
+    duration: "1.5時間",
+    capacity: 20,
+    rating: 4.5,
+    reviewCount: 78,
+    image: "/traditional-japanese-shrine-on-coastal-island-with.jpg",
+    category: "文化・歴史",
+  },
+  {
+    id: "6",
+    title: "海女文化体験 - 素潜りと海藻採取",
+    description: "篠島の海女さんから素潜りの技術を学び、海藻採取を体験します。",
+    price: 9800,
+    duration: "3.5時間",
+    capacity: 6,
+    rating: 4.8,
+    reviewCount: 94,
+    image: "/japanese-ama-diver-woman-in-traditional-white-outf.jpg",
+    category: "漁業体験",
+  },
+]
+
+const categories = ["すべて", "漁業体験", "文化・歴史", "グルメ・食育"]
+const sortOptions = [
+  { value: "popular", label: "人気順" },
+  { value: "newest", label: "新着順" },
+  { value: "price-low", label: "価格が安い順" },
+  { value: "price-high", label: "価格が高い順" },
+  { value: "rating", label: "評価が高い順" },
+]
 
 export default function ExperiencesPage() {
-  const { language, t } = useLanguage()
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState(t.all)
+  const [selectedCategory, setSelectedCategory] = useState("すべて")
   const [sortBy, setSortBy] = useState("popular")
-  const [filteredExperiences, setFilteredExperiences] = useState(experiencesData)
-
-  const categories = [t.all, t.fishingExperience, t.cultureHistory, t.gourmetEducation]
-  const sortOptions = [
-    { value: "popular", label: t.popular },
-    { value: "newest", label: t.newest },
-    { value: "price-low", label: t.priceLow },
-    { value: "price-high", label: t.priceHigh },
-    { value: "rating", label: t.rating },
-  ]
+  const [filteredExperiences, setFilteredExperiences] = useState(allExperiences)
 
   const handleSearch = () => {
-    let filtered = experiencesData
+    let filtered = allExperiences
 
     // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(
         (exp) =>
-          exp.title[language].toLowerCase().includes(searchQuery.toLowerCase()) ||
-          exp.description[language].toLowerCase().includes(searchQuery.toLowerCase()),
+          exp.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          exp.description.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     }
 
     // Filter by category
-    if (selectedCategory !== t.all) {
-      filtered = filtered.filter((exp) => exp.category[language] === selectedCategory)
+    if (selectedCategory !== "すべて") {
+      filtered = filtered.filter((exp) => exp.category === selectedCategory)
     }
 
     // Sort experiences
@@ -74,12 +145,8 @@ export default function ExperiencesPage() {
       {/* Page Header */}
       <section className="pt-24 pb-12 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">
-            {t.experiencesTitle}
-          </h1>
-          <p className="text-muted-foreground text-lg">
-            {t.experiencesSubtitle}
-          </p>
+          <h1 className="text-4xl font-bold mb-4">体験プログラム一覧</h1>
+          <p className="text-muted-foreground text-lg">篠島の魅力を存分に味わえる体験プログラムをお選びください</p>
         </div>
       </section>
 
@@ -90,7 +157,7 @@ export default function ExperiencesPage() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
-                placeholder={t.searchPlaceholder}
+                placeholder="体験を検索..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -127,7 +194,7 @@ export default function ExperiencesPage() {
 
               <Button onClick={handleSearch}>
                 <Filter className="h-4 w-4 mr-2" />
-                {t.search}
+                検索
               </Button>
             </div>
           </div>
@@ -156,45 +223,29 @@ export default function ExperiencesPage() {
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
-            <p className="text-muted-foreground">
-              {filteredExperiences.length}{t.experiencesFound}
-            </p>
+            <p className="text-muted-foreground">{filteredExperiences.length}件の体験が見つかりました</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredExperiences.map((experience) => (
-              <ExperienceCard
-                key={experience.id}
-                id={experience.id}
-                title={experience.title[language]}
-                description={experience.description[language]}
-                category={experience.category[language]}
-                price={experience.price}
-                duration={experience.duration[language]}
-                capacity={experience.capacity}
-                rating={experience.rating}
-                reviewCount={experience.reviewCount}
-                image={experience.image}
-              />
+              <ExperienceCard key={experience.id} {...experience} />
             ))}
           </div>
 
           {filteredExperiences.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">
-                {t.noExperiencesFound}
-              </p>
+              <p className="text-muted-foreground text-lg">条件に合う体験が見つかりませんでした。</p>
               <Button
                 variant="outline"
                 className="mt-4 bg-transparent"
                 onClick={() => {
                   setSearchQuery("")
-                  setSelectedCategory(t.all)
+                  setSelectedCategory("すべて")
                   setSortBy("popular")
-                  setFilteredExperiences(experiencesData)
+                  setFilteredExperiences(allExperiences)
                 }}
               >
-                {t.resetSearchCriteria}
+                検索条件をリセット
               </Button>
             </div>
           )}

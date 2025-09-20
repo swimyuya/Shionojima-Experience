@@ -12,7 +12,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Clock, Users, Star, MapPin, Heart, Share2, ArrowLeft, Check } from "lucide-react"
 
-// Mock data - in a real app, this would come from an API
 const experienceData = {
   id: "1",
   title: "伝統漁業体験 - 定置網漁と船上料理",
@@ -78,7 +77,7 @@ const experienceData = {
   ],
 }
 
-export default function ExperienceDetailPage() {
+export default function Experience1DetailPage() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [selectedTime, setSelectedTime] = useState("")
   const [adultCount, setAdultCount] = useState(2)

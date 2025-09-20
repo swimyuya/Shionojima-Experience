@@ -66,48 +66,6 @@ export interface Translations {
   rating: string
   person: string
   yen: string
-
-  // Experiences Page
-  experiencesTitle: string
-  experiencesSubtitle: string
-  searchPlaceholder: string
-  experiencesFound: string
-  noExperiencesFound: string
-  resetSearchCriteria: string
-
-  // About Page
-  islandLocation: string
-  islandDescription: string
-  culturalHeritage: string
-  naturalBeauty: string
-  accessInfo: string
-  contact: string
-
-  // History Page
-  historyTitle: string
-  historyIntro: string
-  ancientTimes: string
-  fishingTradition: string
-  modernDevelopment: string
-
-  // Experience Details
-  highlights: string
-  included: string
-  requirements: string
-  location: string
-  meetingPoint: string
-  cancellationPolicy: string
-  weatherDependent: string
-
-  // Booking Form
-  personalInfo: string
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  specialRequests: string
-  agreeTerms: string
-  termsAndConditions: string
 }
 
 export const translations: Record<Language, Translations> = {
@@ -178,48 +136,6 @@ export const translations: Record<Language, Translations> = {
     rating: "評価が高い順",
     person: "人",
     yen: "¥",
-
-    // Experiences Page
-    experiencesTitle: "体験プログラム一覧",
-    experiencesSubtitle: "篠島の魅力を存分に味わえる体験プログラムをお選びください",
-    searchPlaceholder: "体験を検索...",
-    experiencesFound: "件の体験が見つかりました",
-    noExperiencesFound: "条件に合う体験が見つかりませんでした。",
-    resetSearchCriteria: "検索条件をリセット",
-
-    // About Page
-    islandLocation: "篠島の位置",
-    islandDescription: "篠島は愛知県知多半島の南端に位置する美しい島です。",
-    culturalHeritage: "文化的遺産",
-    naturalBeauty: "自然の美しさ",
-    accessInfo: "アクセス情報",
-    contact: "お問い合わせ",
-
-    // History Page
-    historyTitle: "篠島の歴史",
-    historyIntro: "古くから漁業で栄えた篠島の歴史をご紹介します。",
-    ancientTimes: "古代からの歩み",
-    fishingTradition: "漁業の伝統",
-    modernDevelopment: "現代の発展",
-
-    // Experience Details
-    highlights: "ハイライト",
-    included: "含まれるもの",
-    requirements: "参加条件",
-    location: "場所",
-    meetingPoint: "集合場所",
-    cancellationPolicy: "キャンセルポリシー",
-    weatherDependent: "天候に左右されます",
-
-    // Booking Form
-    personalInfo: "個人情報",
-    firstName: "姓",
-    lastName: "名",
-    email: "メールアドレス",
-    phone: "電話番号",
-    specialRequests: "特別なご要望",
-    agreeTerms: "利用規約に同意する",
-    termsAndConditions: "利用規約",
   },
   en: {
     // Navigation
@@ -288,47 +204,90 @@ export const translations: Record<Language, Translations> = {
     rating: "Highest Rated",
     person: "person",
     yen: "¥",
+  },
+}
 
-    // Experiences Page
-    experiencesTitle: "Experience Programs",
-    experiencesSubtitle: "Choose from experience programs that let you fully enjoy the charm of Shinojima",
-    searchPlaceholder: "Search experiences...",
-    experiencesFound: " experiences found",
-    noExperiencesFound: "No experiences found matching your criteria.",
-    resetSearchCriteria: "Reset search criteria",
-
-    // About Page
-    islandLocation: "Shinojima Location",
-    islandDescription: "Shinojima is a beautiful island located at the southern tip of the Chita Peninsula in Aichi Prefecture.",
-    culturalHeritage: "Cultural Heritage",
-    naturalBeauty: "Natural Beauty",
-    accessInfo: "Access Information",
-    contact: "Contact",
-
-    // History Page
-    historyTitle: "History of Shinojima",
-    historyIntro: "Discover the history of Shinojima, an island that has prospered from fishing since ancient times.",
-    ancientTimes: "Ancient Times",
-    fishingTradition: "Fishing Tradition",
-    modernDevelopment: "Modern Development",
-
-    // Experience Details
-    highlights: "Highlights",
-    included: "Included",
-    requirements: "Requirements",
-    location: "Location",
-    meetingPoint: "Meeting Point",
-    cancellationPolicy: "Cancellation Policy",
-    weatherDependent: "Weather dependent",
-
-    // Booking Form
-    personalInfo: "Personal Information",
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email Address",
-    phone: "Phone Number",
-    specialRequests: "Special Requests",
-    agreeTerms: "I agree to the terms and conditions",
-    termsAndConditions: "Terms and Conditions",
+export const experienceTranslations = {
+  ja: {
+    experiences: [
+      {
+        id: "1",
+        title: "伝統漁業体験 - 定置網漁と船上料理",
+        description: "篠島の漁師と一緒に定置網漁を体験し、獲れたての魚で船上料理を楽しみます。",
+        category: "漁業体験",
+      },
+      {
+        id: "2",
+        title: "神饌文化体験 - おんべ鯛の調理と奉納",
+        description: "伊勢神宮に奉納される神聖な「おんべ鯛」の調理法を学び、神饌文化の深さを体験します。",
+        category: "文化・歴史",
+      },
+      {
+        id: "3",
+        title: "島の恵み料理教室 - 海の幸を味わう",
+        description: "篠島で獲れた新鮮な魚介類を使った伝統料理を地元の料理人から学びます。",
+        category: "グルメ・食育",
+      },
+      {
+        id: "4",
+        title: "早朝漁業体験 - 朝市と魚の競り",
+        description: "早朝の漁港で魚の競りを見学し、新鮮な魚介類を購入できます。",
+        category: "漁業体験",
+      },
+      {
+        id: "5",
+        title: "篠島神社参拝と歴史散策",
+        description: "島の守り神を祀る神社を参拝し、篠島の歴史と文化を学びます。",
+        category: "文化・歴史",
+      },
+      {
+        id: "6",
+        title: "海女文化体験 - 素潜りと海藻採取",
+        description: "篠島の海女さんから素潜りの技術を学び、海藻採取を体験します。",
+        category: "漁業体験",
+      },
+    ],
+  },
+  en: {
+    experiences: [
+      {
+        id: "1",
+        title: "Traditional Fishing Experience - Fixed Net Fishing & Onboard Cooking",
+        description: "Experience fixed net fishing with Shinojima fishermen and enjoy cooking fresh catch onboard.",
+        category: "Fishing Experience",
+      },
+      {
+        id: "2",
+        title: "Sacred Food Culture Experience - Ombe-tai Preparation & Offering",
+        description:
+          "Learn the preparation of sacred 'Ombe-tai' offered to Ise Grand Shrine and experience the depth of sacred food culture.",
+        category: "Culture & History",
+      },
+      {
+        id: "3",
+        title: "Island Bounty Cooking Class - Taste the Sea's Gifts",
+        description: "Learn traditional cooking using fresh seafood caught in Shinojima from local chefs.",
+        category: "Gourmet & Food Education",
+      },
+      {
+        id: "4",
+        title: "Early Morning Fishing Experience - Morning Market & Fish Auction",
+        description: "Observe fish auctions at the early morning fishing port and purchase fresh seafood.",
+        category: "Fishing Experience",
+      },
+      {
+        id: "5",
+        title: "Shinojima Shrine Visit & Historical Walk",
+        description:
+          "Visit the shrine dedicated to the island's guardian deity and learn about Shinojima's history and culture.",
+        category: "Culture & History",
+      },
+      {
+        id: "6",
+        title: "Ama Diver Culture Experience - Free Diving & Seaweed Harvesting",
+        description: "Learn free diving techniques from Shinojima's ama divers and experience seaweed harvesting.",
+        category: "Fishing Experience",
+      },
+    ],
   },
 }
