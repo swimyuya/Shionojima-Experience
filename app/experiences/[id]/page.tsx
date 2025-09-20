@@ -773,8 +773,10 @@ export default function ExperienceDetailPage() {
                         disabled={!selectedDate || !selectedTime || totalParticipants > experienceData.capacity}
                         asChild
                       >
-                        <Link href={`/experiences/${experienceData.id}/booking`}>予約に進む</Link>
+                        <Link href={`/experiences/${experienceData.id}/booking`}>
                           {t.proceedToBooking}
+                        </Link>
+                      </Button>
 
                       <div className="text-xs text-muted-foreground text-center">
                         {t.noChargeUntilConfirmed}

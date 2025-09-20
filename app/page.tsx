@@ -6,17 +6,60 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight, Fish, Waves, MapPin } from "lucide-react"
 import { useLanguage } from "@/hooks/use-language"
-import { experienceTranslations } from "@/lib/i18n"
 
-const categories = [
-  { name: "fishingExperience", icon: Fish, count: 8 },
-  { name: "cultureHistory", icon: MapPin, count: 5 },
-  { name: "gourmetEducation", icon: Waves, count: 12 },
-]
+// Featured experiences data with translations
+const featuredExperiences = {
+  ja: [
+    {
+      id: "1",
+      title: "伝統漁業体験 - 定置網漁と船上料理",
+      description: "篠島の漁師と一緒に定置網漁を体験し、獲れたての魚で船上料理を楽しみます。",
+      category: "漁業体験",
+    },
+    {
+      id: "2", 
+      title: "神饌文化体験 - おんべ鯛の調理と奉納",
+      description: "伊勢神宮に奉納される神聖な「おんべ鯛」の調理法を学び、神饌文化の深さを体験します。",
+      category: "文化・歴史",
+    },
+    {
+      id: "3",
+      title: "島の恵み料理教室 - 海の幸を味わう", 
+      description: "篠島で獲れた新鮮な魚介類を使った伝統料理を地元の料理人から学びます。",
+      category: "グルメ・食育",
+    },
+  ],
+  en: [
+    {
+      id: "1",
+      title: "Traditional Fishing Experience - Fixed Net Fishing & Onboard Cooking",
+      description: "Experience fixed net fishing with Shinojima fishermen and enjoy cooking fresh catch onboard.",
+      category: "Fishing Experience",
+    },
+    {
+      id: "2",
+      title: "Sacred Food Culture Experience - Ombe-tai Preparation & Offering", 
+      description: "Learn the preparation of sacred 'Ombe-tai' offered to Ise Grand Shrine and experience the depth of sacred food culture.",
+      category: "Culture & History",
+    },
+    {
+      id: "3",
+      title: "Island Bounty Cooking Class - Taste the Sea's Gifts",
+      description: "Learn traditional cooking using fresh seafood caught in Shinojima from local chefs.",
+      category: "Gourmet & Food Education",
+    },
+  ],
+}
 
 export default function HomePage() {
   const { language, t } = useLanguage()
-  const experiences = experienceTranslations[language].experiences.slice(0, 3)
+  const experiences = featuredExperiences[language]
+  
+  const categories = [
+    { name: "fishingExperience", icon: Fish, count: 8 },
+    { name: "cultureHistory", icon: MapPin, count: 5 },
+    { name: "gourmetEducation", icon: Waves, count: 12 },
+  ]
 
   return (
     <div className="min-h-screen">
