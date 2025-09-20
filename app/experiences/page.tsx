@@ -55,7 +55,7 @@ const allExperiences = [
     capacity: 15,
     rating: 4.6,
     reviewCount: 203,
-    image: "/early-morning-fish-market-auction-in-japanese-fish.jpg",
+    image: "/early-morning-fishing-boat-departure-at-sunrise-in-j.jpg",
     category: "漁業体験",
   },
   {
@@ -67,7 +67,7 @@ const allExperiences = [
     capacity: 20,
     rating: 4.5,
     reviewCount: 78,
-    image: "/traditional-japanese-shrine-on-coastal-island-with.jpg",
+    image: "/traditional-japanese-shrine-on-shinojima-island-with.jpg",
     category: "文化・歴史",
   },
   {
@@ -79,7 +79,7 @@ const allExperiences = [
     capacity: 6,
     rating: 4.8,
     reviewCount: 94,
-    image: "/japanese-ama-diver-woman-in-traditional-white-outf.jpg",
+    image: "/traditional-japanese-ama-diver-woman-in-white-divin.jpg",
     category: "漁業体験",
   },
 ]
