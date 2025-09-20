@@ -5,8 +5,10 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { Menu, X } from "lucide-react"
+import { useLanguage } from "@/hooks/use-language"
 
 export function Header() {
+  const { language, t } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -27,18 +29,18 @@ export function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-primary">
-            篠島体験
+            {language === "ja" ? "篠島体験" : "Shinojima Experience"}
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="/experiences" className="text-foreground hover:text-primary transition-colors">
-              体験一覧
+              {t.experiences}
             </Link>
             <Link href="/about" className="text-foreground hover:text-primary transition-colors">
-              篠島について
+              {t.about}
             </Link>
             <Link href="/contact" className="text-foreground hover:text-primary transition-colors">
-              お問い合わせ
+              {language === "ja" ? "お問い合わせ" : "Contact"}
             </Link>
             <LanguageSwitcher />
           </nav>
@@ -57,13 +59,13 @@ export function Header() {
           <nav className="md:hidden mt-4 pb-4 border-t border-border">
             <div className="flex flex-col space-y-4 pt-4">
               <Link href="/experiences" className="text-foreground hover:text-primary transition-colors">
-                体験一覧
+                {t.experiences}
               </Link>
               <Link href="/about" className="text-foreground hover:text-primary transition-colors">
-                篠島について
+                {t.about}
               </Link>
               <Link href="/contact" className="text-foreground hover:text-primary transition-colors">
-                お問い合わせ
+                {language === "ja" ? "お問い合わせ" : "Contact"}
               </Link>
               <LanguageSwitcher />
             </div>

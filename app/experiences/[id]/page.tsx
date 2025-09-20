@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Image from "next/image"
 import Link from "next/link"
 import { Clock, Users, Star, MapPin, Heart, Share2, ArrowLeft, Check } from "lucide-react"
+import { useLanguage } from "@/hooks/use-language"
 
 // Experience data mapping
 const experienceDataMap = {
@@ -416,6 +417,7 @@ const experienceDataMap = {
 }
 
 export default function ExperienceDetailPage() {
+  const { language, t } = useLanguage()
   const params = useParams()
   const experienceId = params.id as string
   
@@ -442,14 +444,16 @@ export default function ExperienceDetailPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Link href="/" className="hover:text-primary">
-              ホーム
+              {t.home}
             </Link>
             <span>/</span>
             <Link href="/experiences" className="hover:text-primary">
-              体験一覧
+              {t.experiences}
             </Link>
             <span>/</span>
-            <span className="text-foreground">{experienceData.title}</span>
+            <span className="text-foreground">
+              {language === "ja" ? experienceData.title : experienceData.title}
+            </span>
           </div>
         </div>
 
@@ -463,19 +467,30 @@ export default function ExperienceDetailPage() {
                   <Button variant="ghost" size="sm" asChild>
                     <Link href="/experiences">
                       <ArrowLeft className="h-4 w-4 mr-2" />
-                      戻る
+                      {t.back}
                     </Link>
                   </Button>
-                  <Badge>{experienceData.category}</Badge>
+                  <Badge>
+                    {language === "ja" ? experienceData.category : 
+                      experienceData.category === "漁業体験" ? "Fishing Experience" :
+                      experienceData.category === "文化・歴史" ? "Culture & History" :
+                      experienceData.category === "グルメ・食育" ? "Gourmet & Food Education" :
+                      experienceData.category
+                    }
+                  </Badge>
                 </div>
 
-                <h1 className="text-3xl font-bold mb-4">{experienceData.title}</h1>
+                <h1 className="text-3xl font-bold mb-4">
+                  {language === "ja" ? experienceData.title : experienceData.title}
+                </h1>
 
                 <div className="flex items-center gap-6 mb-4">
                   <div className="flex items-center gap-1">
                     <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                     <span className="font-medium">{experienceData.rating}</span>
-                    <span className="text-muted-foreground">({experienceData.reviewCount}件のレビュー)</span>
+                    <span className="text-muted-foreground">
+                      ({experienceData.reviewCount}{language === "ja" ? "件のレビュー" : " reviews"})
+                    </span>
                   </div>
                   <div className="flex items-center gap-1 text-muted-foreground">
                     <MapPin className="h-4 w-4" />
@@ -486,11 +501,11 @@ export default function ExperienceDetailPage() {
                 <div className="flex items-center gap-4">
                   <Button variant="outline" size="sm">
                     <Heart className="h-4 w-4 mr-2" />
-                    お気に入り
+                    {language === "ja" ? "お気に入り" : "Favorite"}
                   </Button>
                   <Button variant="outline" size="sm">
                     <Share2 className="h-4 w-4 mr-2" />
-                    シェア
+                    {language === "ja" ? "シェア" : "Share"}
                   </Button>
                 </div>
               </div>
@@ -529,13 +544,19 @@ export default function ExperienceDetailPage() {
 
               {/* Description */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-4">体験について</h2>
-                <p className="text-muted-foreground leading-relaxed">{experienceData.description}</p>
+                <h2 className="text-2xl font-bold mb-4">
+                  {language === "ja" ? "体験について" : "About This Experience"}
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  {language === "ja" ? experienceData.description : experienceData.description}
+                </p>
               </div>
 
               {/* Schedule */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-4">当日のスケジュール</h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  {language === "ja" ? "当日のスケジュール" : "Daily Schedule"}
+                </h2>
                 <div className="space-y-4">
                   {experienceData.schedule.map((item, index) => (
                     <div key={index} className="flex gap-4">
@@ -551,7 +572,9 @@ export default function ExperienceDetailPage() {
               {/* What's Included */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
-                  <h3 className="text-xl font-bold mb-4">含まれるもの</h3>
+                  <h3 className="text-xl font-bold mb-4">
+                    {language === "ja" ? "含まれるもの" : "What's Included"}
+                  </h3>
                   <ul className="space-y-2">
                     {experienceData.included.map((item, index) => (
                       <li key={index} className="flex items-center gap-2">
@@ -562,7 +585,9 @@ export default function ExperienceDetailPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-4">持ち物・服装</h3>
+                  <h3 className="text-xl font-bold mb-4">
+                    {language === "ja" ? "持ち物・服装" : "What to Bring"}
+                  </h3>
                   <ul className="space-y-2">
                     {experienceData.requirements.map((item, index) => (
                       <li key={index} className="flex items-center gap-2">
@@ -576,7 +601,9 @@ export default function ExperienceDetailPage() {
 
               {/* Host */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-4">ホスト紹介</h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  {language === "ja" ? "ホスト紹介" : "Meet Your Host"}
+                </h2>
                 <Card>
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
@@ -586,7 +613,9 @@ export default function ExperienceDetailPage() {
                       </Avatar>
                       <div className="flex-1">
                         <h3 className="text-xl font-semibold mb-2">{experienceData.host.name}</h3>
-                        <p className="text-muted-foreground mb-2">漁業経験: {experienceData.host.experience}</p>
+                        <p className="text-muted-foreground mb-2">
+                          {language === "ja" ? "漁業経験: " : "Experience: "}{experienceData.host.experience}
+                        </p>
                         <p className="text-muted-foreground">{experienceData.host.bio}</p>
                       </div>
                     </div>
@@ -596,7 +625,9 @@ export default function ExperienceDetailPage() {
 
               {/* Reviews */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-4">レビュー</h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  {language === "ja" ? "レビュー" : "Reviews"}
+                </h2>
                 <div className="space-y-6">
                   {experienceData.reviews.map((review) => (
                     <Card key={review.id}>
@@ -632,13 +663,15 @@ export default function ExperienceDetailPage() {
                   <CardContent className="p-6">
                     <div className="text-3xl font-bold text-primary mb-6">
                       ¥{experienceData.price.toLocaleString()}
-                      <span className="text-base font-normal text-muted-foreground">/人</span>
+                      <span className="text-base font-normal text-muted-foreground">
+                        /{t.person}
+                      </span>
                     </div>
 
                     <div className="space-y-6">
                       {/* Date Selection */}
                       <div>
-                        <label className="text-sm font-medium mb-2 block">日付を選択</label>
+                        <label className="text-sm font-medium mb-2 block">{t.selectDate}</label>
                         <Calendar
                           mode="single"
                           selected={selectedDate}
@@ -650,10 +683,10 @@ export default function ExperienceDetailPage() {
 
                       {/* Time Selection */}
                       <div>
-                        <label className="text-sm font-medium mb-2 block">時間を選択</label>
+                        <label className="text-sm font-medium mb-2 block">{t.selectTime}</label>
                         <Select value={selectedTime} onValueChange={setSelectedTime}>
                           <SelectTrigger>
-                            <SelectValue placeholder="時間を選択してください" />
+                            <SelectValue placeholder={language === "ja" ? "時間を選択してください" : "Select time"} />
                           </SelectTrigger>
                           <SelectContent>
                             {availableTimes.map((time) => (
@@ -667,10 +700,10 @@ export default function ExperienceDetailPage() {
 
                       {/* Participant Count */}
                       <div>
-                        <label className="text-sm font-medium mb-2 block">参加人数</label>
+                        <label className="text-sm font-medium mb-2 block">{t.participants}</label>
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
-                            <span>大人</span>
+                            <span>{t.adults}</span>
                             <div className="flex items-center gap-2">
                               <Button
                                 variant="outline"
@@ -690,7 +723,7 @@ export default function ExperienceDetailPage() {
                             </div>
                           </div>
                           <div className="flex items-center justify-between">
-                            <span>子供 (30%割引)</span>
+                            <span>{t.children} ({t.childDiscount})</span>
                             <div className="flex items-center gap-2">
                               <Button
                                 variant="outline"
@@ -718,17 +751,17 @@ export default function ExperienceDetailPage() {
                       <div className="border-t pt-4">
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
-                            <span>大人 × {adultCount}</span>
+                            <span>{t.adults} × {adultCount}</span>
                             <span>¥{(adultCount * experienceData.price).toLocaleString()}</span>
                           </div>
                           {childCount > 0 && (
                             <div className="flex justify-between">
-                              <span>子供 × {childCount}</span>
+                              <span>{t.children} × {childCount}</span>
                               <span>¥{(childCount * experienceData.price * 0.7).toLocaleString()}</span>
                             </div>
                           )}
                           <div className="flex justify-between font-semibold text-base border-t pt-2">
-                            <span>合計</span>
+                            <span>{t.total}</span>
                             <span>¥{totalPrice.toLocaleString()}</span>
                           </div>
                         </div>
@@ -741,9 +774,11 @@ export default function ExperienceDetailPage() {
                         asChild
                       >
                         <Link href={`/experiences/${experienceData.id}/booking`}>予約に進む</Link>
-                      </Button>
+                          {t.proceedToBooking}
 
-                      <div className="text-xs text-muted-foreground text-center">予約確定まで料金は発生しません</div>
+                      <div className="text-xs text-muted-foreground text-center">
+                        {t.noChargeUntilConfirmed}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -754,11 +789,11 @@ export default function ExperienceDetailPage() {
                     <div className="space-y-3 text-sm">
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4 text-muted-foreground" />
-                        <span>所要時間: {experienceData.duration}</span>
+                        <span>{t.duration}: {experienceData.duration}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Users className="h-4 w-4 text-muted-foreground" />
-                        <span>最大参加人数: {experienceData.capacity}名</span>
+                        <span>{t.maxParticipants}: {experienceData.capacity}{language === "ja" ? "名" : ""}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="h-4 w-4 text-muted-foreground" />

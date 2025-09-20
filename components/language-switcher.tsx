@@ -12,18 +12,25 @@ const languages = [
 
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage()
+  
+  const currentLanguage = languages.find((lang) => lang.code === language)
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="gap-2">
           <Globe className="h-4 w-4" />
-          {languages.find((lang) => lang.code === language)?.flag}
+          {currentLanguage?.flag}
+          <span className="hidden sm:inline">{currentLanguage?.name}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {languages.map((lang) => (
-          <DropdownMenuItem key={lang.code} onClick={() => setLanguage(lang.code)} className="gap-2">
+          <DropdownMenuItem 
+            key={lang.code} 
+            onClick={() => setLanguage(lang.code)} 
+            className={`gap-2 ${language === lang.code ? 'bg-accent' : ''}`}
+          >
             <span>{lang.flag}</span>
             {lang.name}
           </DropdownMenuItem>

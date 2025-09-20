@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, Filter } from "lucide-react"
+import { useLanguage } from "@/hooks/use-language"
 
 const allExperiences = [
   {
@@ -84,20 +85,22 @@ const allExperiences = [
   },
 ]
 
-const categories = ["すべて", "漁業体験", "文化・歴史", "グルメ・食育"]
-const sortOptions = [
-  { value: "popular", label: "人気順" },
-  { value: "newest", label: "新着順" },
-  { value: "price-low", label: "価格が安い順" },
-  { value: "price-high", label: "価格が高い順" },
-  { value: "rating", label: "評価が高い順" },
-]
 
 export default function ExperiencesPage() {
+  const { language, t } = useLanguage()
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("すべて")
+  const [selectedCategory, setSelectedCategory] = useState(t.all)
   const [sortBy, setSortBy] = useState("popular")
   const [filteredExperiences, setFilteredExperiences] = useState(allExperiences)
+
+  const categories = [t.all, t.fishingExperience, t.cultureHistory, t.gourmetEducation]
+  const sortOptions = [
+    { value: "popular", label: t.popular },
+    { value: "newest", label: t.newest },
+    { value: "price-low", label: t.priceLow },
+    { value: "price-high", label: t.priceHigh },
+    { value: "rating", label: t.rating },
+  ]
 
   const handleSearch = () => {
     let filtered = allExperiences
@@ -112,8 +115,16 @@ export default function ExperiencesPage() {
     }
 
     // Filter by category
-    if (selectedCategory !== "すべて") {
-      filtered = filtered.filter((exp) => exp.category === selectedCategory)
+    if (selectedCategory !== t.all) {
+      const categoryMap = {
+        [t.fishingExperience]: "漁業体験",
+        [t.cultureHistory]: "文化・歴史", 
+        [t.gourmetEducation]: "グルメ・食育"
+      }
+      const jaCategory = categoryMap[selectedCategory as keyof typeof categoryMap]
+      if (jaCategory) {
+        filtered = filtered.filter((exp) => exp.category === jaCategory)
+      }
     }
 
     // Sort experiences
@@ -145,8 +156,15 @@ export default function ExperiencesPage() {
       {/* Page Header */}
       <section className="pt-24 pb-12 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">体験プログラム一覧</h1>
-          <p className="text-muted-foreground text-lg">篠島の魅力を存分に味わえる体験プログラムをお選びください</p>
+          <h1 className="text-4xl font-bold mb-4">
+            {language === "ja" ? "体験プログラム一覧" : "Experience Programs"}
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            {language === "ja" 
+              ? "篠島の魅力を存分に味わえる体験プログラムをお選びください"
+              : "Choose from experience programs that let you fully enjoy the charm of Shinojima"
+            }
+          </p>
         </div>
       </section>
 
@@ -157,7 +175,7 @@ export default function ExperiencesPage() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
-                placeholder="体験を検索..."
+                placeholder={language === "ja" ? "体験を検索..." : "Search experiences..."}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -194,7 +212,7 @@ export default function ExperiencesPage() {
 
               <Button onClick={handleSearch}>
                 <Filter className="h-4 w-4 mr-2" />
-                検索
+                {t.search}
               </Button>
             </div>
           </div>
@@ -223,29 +241,50 @@ export default function ExperiencesPage() {
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
-            <p className="text-muted-foreground">{filteredExperiences.length}件の体験が見つかりました</p>
+            <p className="text-muted-foreground">
+              {language === "ja" 
+                ? `${filteredExperiences.length}件の体験が見つかりました`
+                : `${filteredExperiences.length} experiences found`
+              }
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredExperiences.map((experience) => (
-              <ExperienceCard key={experience.id} {...experience} />
+              <ExperienceCard 
+                key={experience.id} 
+                {...experience}
+                title={language === "ja" ? experience.title : experience.title}
+                description={language === "ja" ? experience.description : experience.description}
+                category={language === "ja" ? experience.category : 
+                  experience.category === "漁業体験" ? "Fishing Experience" :
+                  experience.category === "文化・歴史" ? "Culture & History" :
+                  experience.category === "グルメ・食育" ? "Gourmet & Food Education" :
+                  experience.category
+                }
+              />
             ))}
           </div>
 
           {filteredExperiences.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">条件に合う体験が見つかりませんでした。</p>
+              <p className="text-muted-foreground text-lg">
+                {language === "ja" 
+                  ? "条件に合う体験が見つかりませんでした。"
+                  : "No experiences found matching your criteria."
+                }
+              </p>
               <Button
                 variant="outline"
                 className="mt-4 bg-transparent"
                 onClick={() => {
                   setSearchQuery("")
-                  setSelectedCategory("すべて")
+                  setSelectedCategory(t.all)
                   setSortBy("popular")
                   setFilteredExperiences(allExperiences)
                 }}
               >
-                検索条件をリセット
+                {language === "ja" ? "検索条件をリセット" : "Reset search criteria"}
               </Button>
             </div>
           )}
