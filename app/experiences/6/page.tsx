@@ -86,9 +86,9 @@ export default function Experience6Page() {
       ],
     },
     images: [
-      "/traditional-japanese-ama-diver-woman-in-white-divin.jpg",
-      "/seaweed-harvesting-underwater-scene-in-clear-japane.jpg",
-      "/traditional-ama-hut-by-the-sea-in-japan-with-divin.jpg",
+      "/japanese-ama-diver-woman-in-traditional-white-outf.jpg",
+      "/traditional-fishing-boat-with-nets-in-japanese-coa.jpg",
+      "/fresh-seafood-cooking-on-boat-with-ocean-view.jpg",
     ],
   }
 

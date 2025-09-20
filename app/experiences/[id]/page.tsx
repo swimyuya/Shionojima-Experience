@@ -226,9 +226,9 @@ const experienceDataMap = {
     reviewCount: 89,
     category: "漁業体験",
     images: [
-      "/early-morning-fishing-boat-departure-at-sunrise-in-j.jpg",
-      "/traditional-japanese-fish-auction-at-morning-market.jpg",
-      "/fishermen-sorting-fresh-catch-at-shinojima-port.jpg",
+      "/early-morning-fish-market-auction-in-japanese-fish.jpg",
+      "/fishermen-working-with-traditional-nets-on-boat-de.jpg",
+      "/fresh-seafood-cooking-on-boat-with-ocean-view.jpg",
     ],
     schedule: [
       { time: "4:30", activity: "篠島港集合" },
@@ -292,9 +292,9 @@ const experienceDataMap = {
     reviewCount: 156,
     category: "文化・歴史",
     images: [
-      "/traditional-japanese-shrine-on-shinojima-island-with.jpg",
-      "/historic-japanese-townscape-with-traditional-buildi.jpg",
-      "/scenic-coastal-view-from-shinojima-island-observato.jpg",
+      "/traditional-japanese-shrine-on-coastal-island-with.jpg",
+      "/historical-shinojima-island-traditional-fishing-vi.jpg",
+      "/beautiful-aerial-view-of-shinojima-island-with-fis.jpg",
     ],
     schedule: [
       { time: "9:00", activity: "篠島港集合" },
@@ -358,9 +358,9 @@ const experienceDataMap = {
     reviewCount: 67,
     category: "漁業体験",
     images: [
-      "/traditional-japanese-ama-diver-woman-in-white-divin.jpg",
-      "/seaweed-harvesting-underwater-scene-in-clear-japane.jpg",
-      "/traditional-ama-hut-by-the-sea-in-japan-with-divin.jpg",
+      "/japanese-ama-diver-woman-in-traditional-white-outf.jpg",
+      "/traditional-fishing-boat-with-nets-in-japanese-coa.jpg",
+      "/fresh-seafood-cooking-on-boat-with-ocean-view.jpg",
     ],
     schedule: [
       { time: "8:00", activity: "海女小屋集合、着替え" },

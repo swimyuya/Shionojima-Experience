@@ -78,9 +78,9 @@ export default function Experience5Page() {
       ],
     },
     images: [
-      "/traditional-japanese-shrine-on-shinojima-island-with.jpg",
-      "/historic-japanese-townscape-with-traditional-buildi.jpg",
-      "/scenic-coastal-view-from-shinojima-island-observato.jpg",
+      "/traditional-japanese-shrine-on-coastal-island-with.jpg",
+      "/historical-shinojima-island-traditional-fishing-vi.jpg",
+      "/beautiful-aerial-view-of-shinojima-island-with-fis.jpg",
     ],
   }
 

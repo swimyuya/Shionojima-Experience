@@ -84,9 +84,9 @@ export default function Experience4Page() {
       ],
     },
     images: [
-      "/early-morning-fishing-boat-departure-at-sunrise-in-j.jpg",
-      "/traditional-japanese-fish-auction-at-morning-market.jpg",
-      "/fishermen-sorting-fresh-catch-at-shinojima-port.jpg",
+      "/early-morning-fish-market-auction-in-japanese-fish.jpg",
+      "/fishermen-working-with-traditional-nets-on-boat-de.jpg",
+      "/fresh-seafood-cooking-on-boat-with-ocean-view.jpg",
     ],
   }
 
